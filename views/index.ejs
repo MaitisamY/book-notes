@@ -1,17 +1,21 @@
 <%- include("partials/header.ejs") %>
 <header>
     <h1><a href="">Jottings</a></h1>
-    <p>Short summary but detailed notes for each <span>book i'v read</span>. 
-        You can use the ISBN number to find your desired one from your local library or store.</p>
+    <p>I'm Muhammad Aitisam Yaseen and this site is dedicated for the <span>books that i'v read.</span>.</p>
 </header>
 <main>
+    <% data.forEach(book => { %>
+        <div class="container">
+            <a href=""><img src="/<%= book.cover %>" width="200"></a>
+            <div class="content">
+                <h2><a href=""><%= book.title.toUpperCase(); %></a></h2>
+            <p>
+                <%= book.sort_description %>
+            </p>
+            </div>
+        </div>
+    <% }); %>
     <p>
-        Everything is negotiable. Challenge authority. You have the power in any situation. 
-        This is how to realize it and use it. A must-read classic from 1980 from a master negotiator. 
-        My notes here aren’t enough because the little book is filled with so many memorable stories — 
-        examples of great day-to-day moments of negotiation that will stick in your head for when you need them. 
-        (I especially loved the one about the power of the prisoner in solitary confinement.) So go buy and read the book. 
-        I’m giving it a 10/10 rating even though the second half of the book loses steam, because the first half is so crucial.
     </p>
 </main>
 <!-- <footer>
