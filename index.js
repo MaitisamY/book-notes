@@ -20,37 +20,31 @@ const port = 3000;
 app.use(express.static("public"));
 app.use(bodyParser.urlencoded({ extended : true }));
 
-let name = [];
-let title = [];
-
-function getJson() {
-    fs.readFile("public/book-covers.json", "utf8", (error, data) => {
-        if (error) {
-          console.log(error);
-          return;
-        }
-        title = JSON.parse(data);
-        title.forEach(ti => {
-            title.push(ti.title);
-        });
-    });
-    return title;
-}
-
-async function getDB() {
-    const title = getJson();
-    const result = await db.query("SELECT * FROM books_data WHERE name LIKE '%' || $1", [title]);
-    name = result.rows;
-    name.forEach(n => {
-        name.push(n.name);
-    });
-    let getLen = title.length;
-    return name + getLen;
-}
+    // fs.readFile("public/book-covers.json", "utf8", (error, data) => {
+    //     if (error) {
+    //       console.log(error);
+    //       return;
+    //     }
+    //     title = JSON.parse(data);
+    //     title.forEach(ti => {
+    //         title.push(ti.title);
+    //     });
+    // });
 
 app.get("/", async (req, res) => {
-    console.log(name);
-    res.render("index.ejs");
+    const result = await db.query("SELECT * FROM books_data ORDER BY CASE rating WHEN '10' THEN 1 WHEN '9' THEN 2 WHEN '8' THEN 3 WHEN '7' THEN 4 WHEN '6' THEN 5 WHEN '5' THEN 6 WHEN '4' THEN 7 WHEN '3' THEN 8 WHEN '2' THEN 9 ELSE 10 END");
+    res.render("index.ejs", {
+        data : result.rows
+    });
+});
+
+app.get("/book/:isbn", async (req, res) => {
+    const isbn = req.params['isbn'];
+    console.log(isbn);
+    const result = await db.query("SELECT * FROM books_data WHERE isbn = $1", [isbn]);
+    res.render("book.ejs", {
+        data : result.rows
+    });
 });
 
 app.listen(port, () => {

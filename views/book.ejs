@@ -1,0 +1,50 @@
+<%- include("partials/header.ejs") %>
+<header>
+    <h1><a href="../">Jottings</a></h1>
+    <p>I'm Muhammad Aitisam Yaseen and this site is dedicated for all the key notes that I take from the <span>books i'v read</span>.</p>
+</header>
+<main>
+    <% data.forEach(book => { %>
+        <div class="container">
+            <a href="/book/isbn=<%= book.isbn %>"><img src="/images/<%= book.cover %>" width="140"></a>
+            <div class="titles">
+                <h2>
+                    <a class="title" href="/book/isbn=<%= book.isbn %>"><%= book.name %>
+                        <% const author = book.author;
+                        const capitals = author.split(" ");
+                        
+                        for (let i = 0; i < capitals.length; i++) {
+                            capitals[i] = capitals[i][0].toUpperCase() + capitals[i].substr(1);
+                        }
+                        %>
+                        By <%= capitals.join(" ") %>
+                    </a>
+                </h2>
+                <table>
+                    <tr>
+                        <th>Read Date</th>
+                        <th>Number of books</th>
+                        <th>Pages</th>
+                        <th>My recommendation</th>
+                    </tr>
+                    <tr>
+                        <td><%= book.read_date %></td>
+                        <td><%= book.number_of_books %></td>
+                        <td><%= book.pages %></td>
+                        <td><%= book.rating %>/10</td>
+                    </tr>
+                </table>
+            </div>
+            <div class="content">
+                <p><%= book.short_description %></p>
+                 <p>Follow the <a target="_blank" href="<%= book.outer_link %>">Reference</a>  to this book to see reviews, purchase options or read options.</p>
+            </div>
+        </div>
+    <% }); %>
+    <p>
+    </p>
+</main>
+<!-- <footer>
+
+</footer> -->
+<%- include("partials/footer.ejs") %>
