@@ -20,22 +20,37 @@ const port = 3000;
 app.use(express.static("public"));
 app.use(bodyParser.urlencoded({ extended : true }));
 
-async function getBooks() {
-    
-}
+let name = [];
+let title = [];
 
-app.get("/", async (req, res) => {
+function getJson() {
     fs.readFile("public/book-covers.json", "utf8", (error, data) => {
         if (error) {
           console.log(error);
           return;
         }
-        else {
-            res.render("index.ejs", {
-                data : JSON.parse(data)
-            });
-        }
+        title = JSON.parse(data);
+        title.forEach(ti => {
+            title.push(ti.title);
+        });
     });
+    return title;
+}
+
+async function getDB() {
+    const title = getJson();
+    const result = await db.query("SELECT * FROM books_data WHERE name LIKE '%' || $1", [title]);
+    name = result.rows;
+    name.forEach(n => {
+        name.push(n.name);
+    });
+    let getLen = title.length;
+    return name + getLen;
+}
+
+app.get("/", async (req, res) => {
+    console.log(name);
+    res.render("index.ejs");
 });
 
 app.listen(port, () => {
