@@ -131,6 +131,9 @@ main {
 table {
     width: 100%;
     text-align: center;
+    border-spacing: 0;
+    border-collapse: collapse;
+    overflow-x: auto;
 }
 
 table tr:nth-child(odd){
@@ -139,7 +142,6 @@ table tr:nth-child(odd){
 
 table, th, td {
     border: 1px solid #3b3b3b;
-    border-collapse: collapse;
   }
 
 table tr, td, th {
@@ -165,4 +167,45 @@ footer {
     width: 50%;
     height: 200px;
     background-color: rgb(117, 116, 116);
+}
+
+@media screen and (max-width: 1400px) {
+    header h1 {
+        font-size: 50px;
+        padding: 5px;
+    }
+    header p {
+        font-family: 'Roboto Slab', serif;
+        font-size: 20px;
+        padding: 20px 5;
+    }
+    .container {
+        display: grid;
+        grid-template-columns: 30% 70%;
+        grid-template-rows: 1fr;
+    }
+}
+
+@media screen and (max-width: 992px) {
+    header {
+        display: flex;
+        flex-direction: column;
+    }
+    .container {
+        display: flex;
+        flex-direction: column;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    header {
+        display: flex;
+        flex-direction: column;
+        width: 92vw;
+        height: auto;
+        padding: 0 25px;
+    }
+    main {
+        width: 92vw;
+    }
 }
