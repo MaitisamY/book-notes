@@ -38,8 +38,8 @@ app.get("/", async (req, res) => {
     });
 });
 
-app.get("/book/:isbn", async (req, res) => {
-    const isbn = req.params['isbn'];
+app.get("/book", async (req, res) => {
+    const isbn = req.query.isbn;
     console.log(isbn);
     const result = await db.query("SELECT * FROM books_data WHERE isbn = $1", [isbn]);
     res.render("book.ejs", {

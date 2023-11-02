@@ -6,10 +6,10 @@
 <main>
     <% data.forEach(book => { %>
         <div class="container">
-            <a href="/book/isbn=<%= book.isbn %>"><img src="/images/<%= book.cover %>" width="140"></a>
+            <a href="/book?isbn=<%= book.isbn %>"><img src="/images/<%= book.cover %>" width="140"></a>
             <div class="titles">
                 <h2>
-                    <a class="title" href="/book/isbn=<%= book.isbn %>"><%= book.name %>
+                    <a class="title" href="/book?isbn=<%= book.isbn %>"><%= book.name %>
                         <% const author = book.author;
                         const capitals = author.split(" ");
                         

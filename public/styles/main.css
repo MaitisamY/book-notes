@@ -67,10 +67,9 @@ header p span {
 
 main {
     width: 50vw;
-    min-height: 100vh;
     height: auto;
     padding: 15px 25px;
-    margin-top: 50px;
+    margin-top: 25px;
     background-color: #292c2c;
     font-family: 'Roboto Slab', serif;
 }
@@ -122,7 +121,11 @@ main {
 
 .container p {
     font-size: 20px;
-    color: #a8a8a8;
+    color: #ffffff;
+}
+
+.container h3 {
+    color: #d3d02c;
 }
 
 table {
@@ -131,11 +134,11 @@ table {
 }
 
 table tr:nth-child(odd){
-    background-color: #575656;
+    background-color: #464646;
 }
 
 table, th, td {
-    border: 1px solid #575656;
+    border: 1px solid #3b3b3b;
     border-collapse: collapse;
   }
 
@@ -143,13 +146,13 @@ table tr, td, th {
     text-align: center;
     text-wrap: wrap;
     word-wrap: break-word;
-    color: #a8a8a8;
-     padding: 7px 10px;
+    color: #ffffff;
+    padding: 7px 10px;
 }
 
 .content a {
     text-align: center;
-    color: #bdbc7c;
+    color: #b4b226;
 }
 
 .content a:hover,
